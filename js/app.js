@@ -1,5 +1,5 @@
 //testing that app.js is linked - OK
-// window.alert("hello");
+window.alert("hello");
 
 /**
  *
