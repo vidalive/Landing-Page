@@ -116,6 +116,8 @@ for (const section of sections) {
 
     liElement.appendChild(aElement);
 
+    aElement.classList.add("menu__link");
+
     const dataNavValue = section.dataset.nav;
 
     aElement.setAttribute("href", "#" + section.id);
