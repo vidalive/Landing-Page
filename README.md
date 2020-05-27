@@ -8,7 +8,7 @@ The starter project has some HTML and CSS styling to display a static version of
 
 - Section
 
-Section 4 is added using Javascript.
+  Section 4 is added using Javascript.
 
 - Navigation
 
