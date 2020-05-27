@@ -94,7 +94,7 @@ mainElement.appendChild(mySection);
 
 // End creating section
 
-// step 2: the nav
+// step 2: Build the nav
 // the nav is made. we have nav and ul element
 
 //we need to add the li elements to the ul
@@ -124,12 +124,10 @@ for (const section of sections) {
 
     // add class name of "menu--link" (exists in the css file) for hovering over the link element
     aElement.classList.add("menu__link");
-
     const sectionDataNavValue = section.dataset.nav;
-    // const sectionIdWithHashTag = "#" + section.id;
 
-    //adding id of section element as href value for the link element
-    // aElement.setAttribute("href", sectionIdWithHashTag);
+    // add section id as the class for every "a" element in the nav
+    aElement.classList.add(section.id);
 
     // adding data-nav value of section element as the text of link element
     aElement.textContent = sectionDataNavValue;
@@ -149,14 +147,25 @@ for (const section of sections) {
 function makeActive() {
   for (const section of sections) {
     const box = section.getBoundingClientRect();
-    // You can play with the values in the "if" condition to further make it more accurate.
-    if (box.top <= 150 && box.bottom >= 150) {
-      // Apply active state on the current section
 
+    //find aElement associated with section
+    const element = document.querySelector(`.${section.id}`);
+
+    // if the section is in the viewport
+    if (box.top <= 150 && box.bottom >= 150) {
+      // apply active state on the current section (the circle and animation)
       section.classList.add("your-active-class");
-    } else {
-      // Remove active state from other section
+
+      // apply active astate to the link element in the nav
+      element.classList.add("nav-active");
+    }
+
+    // if the section is not in the viewport
+    else {
+      // Remove active state from section (the circle and animation)
       section.classList.remove("your-active-class");
+      // Remove active state from the link element in the nav
+      element.classList.remove("nav-active");
     }
   }
 }
