@@ -91,20 +91,18 @@ for (const section of sections) {
 
 // STEP 3: Checking if a section is in viewport
 
-// This code is taken from Udacity Knowledge posted by a mentor
-//https://knowledge.udacity.com/questions/85408#96950
-
 // 3-1 : make a function that knows when a section is in viewport:
 // then adds the class "your-active-class" to that section, and the related link element in the nav, and if is in not in the viewport, removes the classes from section and nav link element
 function makeActive() {
   for (const section of sections) {
+    // get the properties of the section in relation to the viewport using getBoundingClientRect() method
     const box = section.getBoundingClientRect();
 
-    //find aElement that has the ID of a section as its class
+    //find aElement that has the ID of a section as its class (used for activating the nav link below)
     const element = document.querySelector(`.${section.id}`);
 
     // if the section is in the viewport
-    if (box.top <= 150 && box.bottom >= 150) {
+    if (box.top <= 100 && box.bottom >= 100) {
       // add "your-active-class" class on the current section (the circle and animation)
       section.classList.add("your-active-class");
 
