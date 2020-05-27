@@ -16,7 +16,7 @@ The starter project has some HTML and CSS styling to display a static version of
 
 - Scroll
 
-  - When user scrolls the page, whichever section that is in viewport will have the animating circles on them. In addition, the navigation link that is related to that section will be highlighted.
+  - When user scrolls the page, whichever section that is in viewport, will have the animating circles on them (as an indicator). In addition, the navigation link that is related to that section will be highlighted.
 
 - Click
 
