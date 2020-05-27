@@ -233,7 +233,7 @@ section.your-active-class .landing__container::after {
   }
 }
 
-/* style for nav link */
+/* highlight style for nav link */
 .nav-active {
   background-color: #ced82f;
 }
