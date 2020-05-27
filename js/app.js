@@ -1,4 +1,4 @@
-// STEP 1: Create a full section with the section structure and append it to the body
+///////// STEP 1: Create a full section with the section structure and append it to the body
 
 //creating h2
 const headingTwo = document.createElement("h2");
@@ -42,13 +42,16 @@ mainElement.appendChild(mySection);
 
 // End creating section
 
-// STEP 2: Build the navigation
+///////// STEP 2: Build the navigation
 
 // the nav is made. we have nav and ul element
 
-//we need to add the li elements to the ul
-/* <ul>
-  <li></li>
+// we need to add the "li" and "a" elements to the ul
+/* 
+<ul>
+  <li>
+    <a></a>
+  </li>
 </ul> */
 
 const sections = document.querySelectorAll("section");
@@ -89,7 +92,7 @@ for (const section of sections) {
   }
 }
 
-// STEP 3: Checking if a section is in viewport
+///////// STEP 3: Checking if a section is in viewport
 
 // 3-1 : make a function that knows when a section is in viewport:
 // then adds the class "your-active-class" to that section, and the related link element in the nav, and if is in not in the viewport, removes the classes from section and nav link element
