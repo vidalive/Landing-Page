@@ -6,7 +6,7 @@ The starter project has some HTML and CSS styling to display a static version of
 
 ### functionalities
 
-⋅⋅\* Unordered sub-list.
+- Unordered sub-list.
 
 ⋅⋅\* Section
 
