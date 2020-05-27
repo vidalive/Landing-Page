@@ -6,12 +6,10 @@ The starter project has some HTML and CSS styling to display a static version of
 
 ### functionalities
 
-- Unordered sub-list.
+- Section
 
-⋅⋅\* Section
+- Navigation
 
-⋅⋅Navigation
+- Scroll
 
-⋅⋅Scroll
-
-⋅⋅Click
+- Click
