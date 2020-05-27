@@ -233,8 +233,7 @@ section.your-active-class .landing__container::after {
   }
 }
 
-/* style for nav active state */
-
+/* style for nav link */
 .nav-active {
-  background-color: red;
+  background-color: #ced82f;
 }

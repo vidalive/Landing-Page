@@ -1,56 +1,4 @@
-/**
- *
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- *
- * Dependencies: None
- *
- * JS Version: ES2015/ES6
- *
- * JS Standard: ESlint
- *
- */
-
-/**
- * Define Global Variables
- *
- */
-
-/**
- * End Global Variables
- * Start Helper Functions
- *
- */
-
-/**
- * End Helper Functions
- * Begin Main Functions
- *
- */
-
-// build the nav
-
-// Add class 'active' to section when near top of viewport
-
-// Scroll to anchor ID using scrollTO event
-
-/**
- * End Main Functions
- * Begin Events
- *
- */
-
-// Build menu
-
-// Scroll to section on link click
-
-// Set sections as active
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Vida's Code starts here
-
-// Create a full section with the section structure and append it to the body
+// STEP 1: Create a full section with the section structure and append it to the body
 
 //creating h2
 const headingTwo = document.createElement("h2");
@@ -94,7 +42,8 @@ mainElement.appendChild(mySection);
 
 // End creating section
 
-// step 2: Build the nav
+// STEP 2: Build the navigation
+
 // the nav is made. we have nav and ul element
 
 //we need to add the li elements to the ul
@@ -122,17 +71,17 @@ for (const section of sections) {
     // add link element to li
     liElement.appendChild(aElement);
 
-    // add class name of "menu--link" (exists in the css file) for hovering over the link element
+    // add class name of "menu__link" (exists in the css file) for hovering over the link element
     aElement.classList.add("menu__link");
-    const sectionDataNavValue = section.dataset.nav;
-
-    // add section id as the class for every "a" element in the nav
-    aElement.classList.add(section.id);
 
     // adding data-nav value of section element as the text of link element
+    const sectionDataNavValue = section.dataset.nav;
     aElement.textContent = sectionDataNavValue;
 
-    // add event listener click to a element
+    // add section id as the class for every "a" element in the nav (used later for highlighting the nav when a section is in viewport)
+    aElement.classList.add(section.id);
+
+    // add event listener click to "a" element
     aElement.addEventListener("click", function () {
       // scroll to element
       section.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -140,38 +89,41 @@ for (const section of sections) {
   }
 }
 
-// This code is taken from Udacity Knowledge:
+// STEP 3: Checking if a section is in viewport
+
+// This code is taken from Udacity Knowledge posted by a mentor
 //https://knowledge.udacity.com/questions/85408#96950
 
-// Step 1 : make a function that knows when a section is in viewport, and then adds the class "your-active-class" to that section, and then remove that class when the section is not in viewport
+// 3-1 : make a function that knows when a section is in viewport:
+// then adds the class "your-active-class" to that section, and the related link element in the nav, and if is in not in the viewport, removes the classes from section and nav link element
 function makeActive() {
   for (const section of sections) {
     const box = section.getBoundingClientRect();
 
-    //find aElement associated with section
+    //find aElement that has the ID of a section as its class
     const element = document.querySelector(`.${section.id}`);
 
     // if the section is in the viewport
     if (box.top <= 150 && box.bottom >= 150) {
-      // apply active state on the current section (the circle and animation)
+      // add "your-active-class" class on the current section (the circle and animation)
       section.classList.add("your-active-class");
 
-      // apply active astate to the link element in the nav
+      // add "nav-active" class to the link element in the nav
       element.classList.add("nav-active");
     }
 
     // if the section is not in the viewport
     else {
-      // Remove active state from section (the circle and animation)
+      // remove "your-active-class" class on the current section (the circle and animation)
       section.classList.remove("your-active-class");
-      // Remove active state from the link element in the nav
+      // remove nav-active" class to the link element in the nav
       element.classList.remove("nav-active");
     }
   }
 }
 
-// Step 2: call  the makeActive function whenever user scrolls the page
-// Make sections active
+// 3-2: call the makeActive function whenever user scrolls the page
+// Make sections and nav links active
 document.addEventListener("scroll", function () {
   makeActive();
 });
