@@ -104,24 +104,65 @@ mainElement.appendChild(mySection);
 
 const sections = document.querySelectorAll("section");
 
+//looping through section elements
 for (const section of sections) {
+  // checking to see if the section element added has a "data-nav" attribute. So that in the future, only the section elements with data-attribute are added to the nav
   if (section.hasAttribute("data-nav")) {
     const ulElement = document.querySelector("#navbar__list");
 
+    // create li
     const liElement = document.createElement("li");
 
+    //add li to ul
     ulElement.appendChild(liElement);
 
+    // create a (link element)
     const aElement = document.createElement("a");
 
+    // add link element to li
     liElement.appendChild(aElement);
 
+    // add class name of "menu--link" (exists in the css file) for hovering over the link element
     aElement.classList.add("menu__link");
 
-    const dataNavValue = section.dataset.nav;
+    const sectionDataNavValue = section.dataset.nav;
+    // const sectionIdWithHashTag = "#" + section.id;
 
-    aElement.setAttribute("href", "#" + section.id);
+    //adding id of section element as href value for the link element
+    // aElement.setAttribute("href", sectionIdWithHashTag);
 
-    aElement.textContent = dataNavValue;
+    // adding data-nav value of section element as the text of link element
+    aElement.textContent = sectionDataNavValue;
+
+    // add event listener click to a element
+    aElement.addEventListener("click", function () {
+      // scroll to element
+      section.scrollIntoView({ behavior: "smooth", block: "end" });
+    });
   }
 }
+
+// This code is taken from Udacity Knowledge:
+//https://knowledge.udacity.com/questions/85408#96950
+
+// Step 1 : make a function that knows when a section is in viewport, and then adds the class "your-active-class" to that section, and then remove that class when the section is not in viewport
+function makeActive() {
+  for (const section of sections) {
+    const box = section.getBoundingClientRect();
+    // You can play with the values in the "if" condition to further make it more accurate.
+    if (box.top <= 150 && box.bottom >= 150) {
+      // Apply active state on the current section
+
+      section.classList.add("your-active-class");
+    } else {
+      // Remove active state from other section
+      section.classList.remove("your-active-class");
+    }
+  }
+}
+
+// Step 2: call  the makeActive function whenever user scrolls the page
+// Make sections active
+document.addEventListener("scroll", function () {
+  makeActive();
+});
