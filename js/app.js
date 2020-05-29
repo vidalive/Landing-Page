@@ -97,30 +97,34 @@ for (const section of sections) {
 // 3-1 : make a function that knows when a section is in viewport:
 // then adds the class "your-active-class" to that section, and the related link element in the nav, and if is in not in the viewport, removes the classes from section and nav link element
 function makeActive() {
+  let minTopSection = sections[0];
+
   for (const section of sections) {
     // get the properties of the section in relation to the viewport using getBoundingClientRect() method
-    const box = section.getBoundingClientRect();
+    const sectionTop = Math.abs(section.getBoundingClientRect().top);
+
+    const minTop = Math.abs(minTopSection.getBoundingClientRect().top);
+
+    if (sectionTop < minTop) {
+      minTopSection = section;
+    }
 
     //find aElement that has the ID of a section as its class (used for activating the nav link below)
     const element = document.querySelector(`.${section.id}`);
 
-    // if the section is in the viewport
-    if (box.top <= 100 && box.bottom >= 100) {
-      // add "your-active-class" class on the current section (the circle and animation)
-      section.classList.add("your-active-class");
-
-      // add "nav-active" class to the link element in the nav
-      element.classList.add("nav-active");
-    }
-
-    // if the section is not in the viewport
-    else {
-      // remove "your-active-class" class on the current section (the circle and animation)
-      section.classList.remove("your-active-class");
-      // remove nav-active" class to the link element in the nav
-      element.classList.remove("nav-active");
-    }
+    // remove "your-active-class" class on the current section (the circle and animation)
+    section.classList.remove("your-active-class");
+    // remove nav-active" class to the link element in the nav
+    element.classList.remove("nav-active");
   }
+
+  const element = document.querySelector(`.${minTopSection.id}`);
+
+  // add "your-active-class" class on the current section (the circle and animation)
+  minTopSection.classList.add("your-active-class");
+
+  // add "nav-active" class to the link element in the nav
+  element.classList.add("nav-active");
 }
 
 // 3-2: call the makeActive function whenever user scrolls the page
@@ -128,3 +132,15 @@ function makeActive() {
 document.addEventListener("scroll", function () {
   makeActive();
 });
+
+// when I click on nav item on section 2 , the active class is applied section one
+
+function HighLightNav(aElement) {
+  const navLinks = document.querySelectorAll(".menu__link");
+
+  for (const navLink of navLinks) {
+    navLink.classList.remove("nav-active");
+  }
+
+  aElement.classList.add("nav-active");
+}
