@@ -84,7 +84,7 @@ for (const section of sections) {
     // add section id as the class for every "a" element in the nav (used later for highlighting the nav when a section is in viewport)
     aElement.classList.add(section.id);
 
-    // add event listener click to "a" element
+    // add event listener click to "a" element. when an a element is clicked, it will scroll to the related section
     aElement.addEventListener("click", function () {
       // scroll to element
       section.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -95,35 +95,41 @@ for (const section of sections) {
 ///////// STEP 3: Checking if a section is in viewport
 
 // 3-1 : make a function that knows when a section is in viewport:
-// then adds the class "your-active-class" to that section, and the related link element in the nav, and if is in not in the viewport, removes the classes from section and nav link element
+// then adds the class "your-active-class" to that section, and the related link element in the nav
+// Whichever section that has the minimum top value to the viewport, is the section in viewport
 function makeActive() {
+  // section initializer used for section top property
   let minTopSection = sections[0];
 
   for (const section of sections) {
-    // get the properties of the section in relation to the viewport using getBoundingClientRect() method
+    // get the absolute value of top property of the section in relation to the viewport using getBoundingClientRect() method
     const sectionTop = Math.abs(section.getBoundingClientRect().top);
 
+    // get the absolute value of initial section
     const minTop = Math.abs(minTopSection.getBoundingClientRect().top);
 
+    // if top of section is less that the top of the initial section, then that section will become the section that is in viewport
     if (sectionTop < minTop) {
       minTopSection = section;
     }
 
-    //find aElement that has the ID of a section as its class (used for activating the nav link below)
+    //find aElement that has the ID of the current section as its class
     const element = document.querySelector(`.${section.id}`);
 
-    // remove "your-active-class" class on the current section (the circle and animation)
+    // remove "your-active-class" (the animating circle) from the current section
     section.classList.remove("your-active-class");
-    // remove nav-active" class to the link element in the nav
+    // remove "nav-active" class from the link element in the nav
     element.classList.remove("nav-active");
   }
+  // loop-end
 
+  // find the element ("a" element) that its class is the same as the id of the section in viewport
   const element = document.querySelector(`.${minTopSection.id}`);
 
-  // add "your-active-class" class on the current section (the circle and animation)
+  // add "your-active-class" (the animating circle) class on that current section ( section in viewport)
   minTopSection.classList.add("your-active-class");
 
-  // add "nav-active" class to the link element in the nav
+  // add "nav-active" class to the link element in the nav ( this is the nav link element that its related section is in viewport. This is how the browser knows that they are related)
   element.classList.add("nav-active");
 }
 
@@ -132,15 +138,3 @@ function makeActive() {
 document.addEventListener("scroll", function () {
   makeActive();
 });
-
-// when I click on nav item on section 2 , the active class is applied section one
-
-function HighLightNav(aElement) {
-  const navLinks = document.querySelectorAll(".menu__link");
-
-  for (const navLink of navLinks) {
-    navLink.classList.remove("nav-active");
-  }
-
-  aElement.classList.add("nav-active");
-}
