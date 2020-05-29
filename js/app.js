@@ -86,17 +86,20 @@ for (const section of sections) {
 
     // add event listener click to "a" element. when an a element is clicked, it will scroll to the related section
     aElement.addEventListener("click", function () {
-      // scroll to element
+      // scroll to element in a smooth way
       section.scrollIntoView({ behavior: "smooth", block: "end" });
     });
   }
 }
 
-///////// STEP 3: Checking if a section is in viewport
+///////// STEP 3: Determiing which section is in viewport, and perform appropriate actions
 
-// 3-1 : make a function that knows when a section is in viewport:
-// then adds the class "your-active-class" to that section, and the related link element in the nav
-// Whichever section that has the minimum top value to the viewport, is the section in viewport
+// 3-1 : make a function that does the following:
+
+// loop through the sections and find the section which has the minimum top value. Make that section "the section in viewport"
+// remove the active classes from all the sections, and from their related nav link
+// add the active classes to the section in viewport and its related nav link
+
 function makeActive() {
   // section initializer used for section top property
   let minTopSection = sections[0];
